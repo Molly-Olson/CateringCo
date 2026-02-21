@@ -8,5 +8,14 @@ namespace CateringCo.Controllers
         {
             return View();
         }
+        [Route("Admin/Info")]
+        public IActionResult About()
+        {
+            return View();
+        }
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
     }
 }

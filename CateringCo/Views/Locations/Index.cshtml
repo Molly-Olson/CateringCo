@@ -1,0 +1,23 @@
+﻿@model List<CateringCo.Models.Locations>
+
+<h1>
+	Locations Index Page
+</h1>
+<p>
+	this page is now linked to EF 
+</p>
+@if (Model == null || Model.Count == 0)
+{
+	<p><em>No Locatons Found</em></p>
+}
+else
+{
+	<ul>
+		@foreach (var locations in Model)
+		{<li>
+			<strong>@locations.Name</strong>
+			Located at @locations.Address
+			Reach us @locations.Phone
+		</li>}
+	</ul>
+}
