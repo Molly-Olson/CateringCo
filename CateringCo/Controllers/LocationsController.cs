@@ -1,5 +1,6 @@
 ﻿using CateringCo.Models;
 using Microsoft.AspNetCore.Mvc;
+using CateringCo.ViewModels;
 
 namespace CateringCo.Controllers
 {
@@ -13,7 +14,16 @@ namespace CateringCo.Controllers
         public IActionResult Index()
         {
             var locations = _context.Locations.ToList();
-            return View(locations);
+            var vm = new LocationsListViewModel
+            {
+                Locations = locations,
+                TotalCount = locations.Count,
+                SearchTerm = "Our Locations",
+                EmptyMessage = "No locations found."
+
+            };
+
+            return View(vm);
         }
         public IActionResult Create()
         {

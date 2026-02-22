@@ -1,5 +1,6 @@
 ﻿using CateringCo.Models;
 using Microsoft.AspNetCore.Mvc;
+using CateringCo.ViewModels;
 
 namespace CateringCo.Controllers
 {
@@ -13,7 +14,14 @@ namespace CateringCo.Controllers
         public IActionResult Index()
         {
                 var menuItems = _context.MenuItems.ToList();
-                return View(menuItems);
+            var vm = new MenuItemListViewModel
+            {
+                MenuItems = menuItems,
+                PageTitle = "Menu Items",
+                TotalCount = menuItems.Count,
+                EmptyMessage = "No menu items available."
+                };
+            return View(vm);
         }
         public IActionResult Create()
         {

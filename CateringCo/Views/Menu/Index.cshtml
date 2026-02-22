@@ -1,26 +1,31 @@
-﻿@model List<CateringCo.Models.MenuItem>
+﻿@* @model List<CateringCo.Models.MenuItem> *@
+
+@model CateringCo.ViewModels.MenuItemListViewModel
 
 <h1>
-CateringCo formerly known as FoodTruck Menu Index View
+	Menu Items
+@* CateringCo formerly known as FoodTruck Menu Index View *@
 </h1>
 <p>
-	Check back soon for menu details!
+	Total Menu Items: <strong>@Model.TotalCount</strong>
 </p>
 
-@if (Model == null || Model.Count == 0)
+@if (Model.MenuItems == null || Model.MenuItems.Count == 0)
 {
-	<p><em>No Menu Items Found</em></p>
+	@* <p><em>No Menu Items Found</em></p> *@
+	<p><em>@Model.EmptyMessage</em></p>
 }
 else
 {
 	<ul>
-		@foreach (var MenuItem in Model)
+		@foreach (var MenuItem in Model.MenuItems)
 		{
-			<li>
+			<partial name="_MenuItemCard" model="MenuItem" />
+			@* <li>
 				<strong>@MenuItem.Name</strong>
 				Description @MenuItem.Description 
 				For @MenuItem.Price
-			</li>
+			</li> *@
 		}
 	</ul>
 }

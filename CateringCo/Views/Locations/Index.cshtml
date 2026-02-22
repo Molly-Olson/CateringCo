@@ -1,23 +1,29 @@
-﻿@model List<CateringCo.Models.Locations>
+﻿@* @model List<CateringCo.Models.Locations> *@
+
+@model CateringCo.ViewModels.LocationsListViewModel
 
 <h1>
-	Locations Index Page
+	Locations
 </h1>
 <p>
-	this page is now linked to EF 
+	Total Locations: <strong>@Model.TotalCount</strong> 
 </p>
-@if (Model == null || Model.Count == 0)
+
+@if (Model.Locations == null || Model.Locations.Count == 0)
 {
-	<p><em>No Locatons Found</em></p>
+	<p><em>@Model.EmptyMessage</em></p>
 }
 else
 {
 	<ul>
-		@foreach (var locations in Model)
-		{<li>
+		@foreach (var locations in Model.Locations)
+		{
+			<partial name="_LocationCard" model="locations" />
+			@* <li>
 			<strong>@locations.Name</strong>
 			Located at @locations.Address
 			Reach us @locations.Phone
-		</li>}
+		   </li> *@
+		}
 	</ul>
 }
