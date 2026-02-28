@@ -1,6 +1,7 @@
 ﻿using CateringCo.Models;
 using Microsoft.AspNetCore.Mvc;
 using CateringCo.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CateringCo.Controllers
 {
@@ -30,10 +31,17 @@ namespace CateringCo.Controllers
             return View();
         }
 
+        // Week six
+        [Authorize(Roles = "Admin")]
+        public IActionResult Manage()
+        {
+            return View();
+        }
+
     }
 }
 
-
+//not sure what this is down here...
         //[Route("Locations/Info")]
         //public IActionResult About()
         //{
