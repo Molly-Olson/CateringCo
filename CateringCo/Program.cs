@@ -27,11 +27,23 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 
 builder.Services.AddTransient<IEmailSender, DevEmailSender>();
 
+// Week Seven
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "CateringCo API", Version = "v1" });
+    c.DocInclusionPredicate((docName, apiDesc) =>
+    apiDesc.RelativePath != null &&
+    apiDesc.RelativePath.StartsWith("api/", StringComparison.OrdinalIgnoreCase));
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    // app.UseExceptionHandler("/Home/Error");  **Week Seven Update
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 
