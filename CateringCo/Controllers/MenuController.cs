@@ -1,4 +1,5 @@
-﻿using CateringCo.Models;
+﻿using CateringCo.Services.Interfaces;
+using CateringCo.Models;
 using Microsoft.AspNetCore.Mvc;
 using CateringCo.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -7,15 +8,15 @@ namespace CateringCo.Controllers
 {
     public class MenuController : Controller
     {
-        private readonly CateringCoContext _context;
-        public MenuController(CateringCoContext context)
+        private readonly IMenuService _menuService;
+        public MenuController(IMenuService menuService)
         {
-            _context = context;
+            _menuService = menuService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-                var menuItems = _context.MenuItems.ToList();
-            var vm = new MenuItemListViewModel
+                var menuItems = await _menuService.GetAllAsync();
+                var vm = new MenuItemListViewModel
             {
                 MenuItems = menuItems,
                 PageTitle = "Menu Items",
@@ -24,17 +25,24 @@ namespace CateringCo.Controllers
                 };
             return View(vm);
         }
+        //week eight
+        [Route("Menu/Info")]
+        public IActionResult About()
+        {
+            return View();
+        }
         public IActionResult Create()
         {
             return View();
         }
 
-        [Route("Menu/Info")]
-        
-        public IActionResult Details()
-        {
-            return View();
-        }
+        // this commented out section is why the details link broke!! But if I add it back in then this files code breaks because of the repeat Route
+        //[Route("Menu/Info")]
+
+        //public IActionResult Details()
+        //{
+        //    return View();
+        //}
 
         // Week six
         [Authorize(Roles = "Admin")]

@@ -2,22 +2,24 @@
 using Microsoft.AspNetCore.Mvc;
 using CateringCo.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using CateringCo.Services.Interfaces;
 
 namespace CateringCo.Controllers
 {
     public class LocationsController : Controller
     {
-        private readonly CateringCoContext _context;
-        public LocationsController(CateringCoContext context)
+        private readonly ILocationsService _locationsService;
+        public LocationsController(ILocationsService locationsService)
         {
-            _context = context;
+            _locationsService = locationsService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var locations = _context.Locations.ToList();
+            var locations = await _locationsService.GetAllAsync();
             var vm = new LocationsListViewModel
             {
                 Locations = locations,
+                PageTitle = "Our Locations",
                 TotalCount = locations.Count,
                 SearchTerm = "Our Locations",
                 EmptyMessage = "No locations found."
@@ -27,6 +29,12 @@ namespace CateringCo.Controllers
             return View(vm);
         }
         public IActionResult Create()
+        {
+            return View();
+        }
+        //week eight
+        [Route ("Locations/Info")]
+        public IActionResult About()
         {
             return View();
         }

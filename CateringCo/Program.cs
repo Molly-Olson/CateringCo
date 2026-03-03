@@ -1,6 +1,8 @@
 using CateringCo;
 using CateringCo.Models;
 using CateringCo.Services;
+using CateringCo.Services.Interfaces;
+
 //using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -26,6 +28,10 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 .AddDefaultTokenProviders();
 
 builder.Services.AddTransient<IEmailSender, DevEmailSender>();
+
+//Week Eight add
+builder.Services.AddScoped<ILocationsService, LocationsService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 
 // Week Seven
 builder.Services.AddEndpointsApiExplorer();
