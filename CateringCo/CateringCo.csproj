@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\CateringRequestService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Admin\About.cshtml" />
     <Content Remove="Views\Menu\About.cshtml" />
   </ItemGroup>
