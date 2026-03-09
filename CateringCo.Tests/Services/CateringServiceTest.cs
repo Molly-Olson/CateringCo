@@ -46,6 +46,26 @@ namespace CateringCo.Tests.Services
             Assert.Equal(22, results[3].Price);
 
         }
+
+        // new edge case... I think? :)
+        [Fact]
+        public async Task GetAllAsync_FiltersOutMenuItem_WithEmptyPrice()
+        {
+            var dbName = "OrdersByPrice";
+            using var context = CateringCoContextFactory.Create(dbName);
+            context.MenuItems.AddRange(
+                new MenuItem { Name = "Pea Pesto Pasta", Description = "Sweatpea pesto with nutritional yeast and hemp hearts over bowtie pasta", Price = 22 },
+                new MenuItem { Name = "Asparagus Tacos" },
+                new MenuItem { Name = "Banana Pancakes", Price = 15 }
+                );
+            await context.SaveChangesAsync();
+            var service = new MenuService(context);
+            var results = await service.GetAllAsync();
+
+            Assert.Equal(22, results[0].Price);
+            Assert.Equal(15, results[1].Price);
+        }
+
         [Fact]
         public async Task GetAllAsync_FiltersOutLocations_WithEmptyAddress()
         {
