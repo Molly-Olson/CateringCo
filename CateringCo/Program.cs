@@ -88,7 +88,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<CateringCoContext>();
 
-    //var services = scope.ServiceProvider;
+   // var services = scope.ServiceProvider;
     //var db = services.GetRequiredService<CateringCoContext>();
     //var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     //var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
@@ -97,10 +97,11 @@ using (var scope = app.Services.CreateScope())
     if (!db.MenuItems.Any())
     {
         db.MenuItems.AddRange(
-            new MenuItem { Name = "Chicken Alfredo", Description = "Creamy pasta with grilled chicken", Price = 12.99m },
-            new MenuItem { Name = "Beef Stroganoff", Description = "Tender beef in a rich mushroom sauce", Price = 14.99m },
-            new MenuItem { Name = "Vegetable Stir Fry", Description = "Mixed vegetables saut�ed in a savory sauce", Price = 10.99m }
-        );
+            new MenuItem { Name = "Lemon Pepper Pasta with Broccoli", Description = "Creamy cheesy homemade sauce with zest over freshly prepared pasta with brocolli.", Price = 12.99m },
+            new MenuItem { Name = "Potsticker Pasta", Description = "Tender rich mushroom medley sauteed with purple onions, bok choy, and cabbage in a creamy vegan sauce with asian flavors over udon noodles.", Price = 14.99m },
+            new MenuItem { Name = "Vegetable Stir Fry", Description = "Mixed vegetables sauteed in a savory sauce over rice.", Price = 10.99m },
+            new MenuItem { Name = "Spring Veggie Pie", Description = "Crispy buttery tart shell filled with trycolored carrots, asparagus, brocollini and leeks baked in a creamy cheesy blend of ricotta, parmesean, and asiago topped with truffel oil dressed arugula.", Price = 13.99m }
+            ); 
         db.SaveChanges();
     }
 
